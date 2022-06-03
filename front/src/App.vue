@@ -1,7 +1,12 @@
 <template>
-  <div id="app">    
+  <div id="app">  
+    <p> ID </p>
+    <p>Номер колеса</p>
+    <p class='warn'>Предупреждение</p>
     <div v-for="(koleso, index) in kolesa" :key="index">
-      <p>{{ koleso.id }} {{ koleso.warning }} {{ koleso.wheel_id }}</p>
+      <p>{{ koleso.id }} </p>
+      <p>{{ koleso.wheel_id }}</p>
+      <p class='warn'>{{ koleso.warning }}</p>
       <button @click="event => addClass(event, koleso.id, index)">
         {{ koleso.isDelete ? 'Confirm' : 'Confirm?' }}
       </button>
@@ -51,7 +56,11 @@ export default {
 </script>
 
 <style scoped>
-  div div{
+  /* div div{
+    flex-direction: row;
+    display: flex; 
+  } */
+  div div div{
     color: black ;
     font-weight: bolder;
     flex-direction: row;
@@ -62,24 +71,28 @@ export default {
       }
 
   p   {
-    width: 50vh;
+    width: 17vh;
     border-style: solid;
     border-color: black;
     border-width: 2px;
     margin-top:0.7vh;
     margin-right: 7vh;
-    margin-left: 30vh;
+    margin-left: 10vh;
     margin-bottom: 0.7vh ;
     text-align: center;
       }
 
   button{
-      margin-right: 46vh;
+      margin-right: 40vh;
       background-color: red;
       color: aliceblue ;
       border-radius: 6px;
       border-style: solid;
         }
+
+  .warn{
+    width: 20vh;
+  }
 
 button:active, 
 button.clicked { 
