@@ -1,0 +1,30 @@
+body {
+    color: black ;
+    font-weight: bolder;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+     }
+
+p    {
+    width: 27%;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    margin-right: 7vh;
+    margin-left: 30vh;
+     }
+
+button  {
+      margin-right: 46vh;
+      background-color: red;
+      color: aliceblue ;
+        }
+
+button:active, 
+button.clicked { 
+  background-color: green;
+}
+
