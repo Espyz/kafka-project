@@ -3,6 +3,7 @@
     <p> ID </p>
     <p>Номер колеса</p>
     <p class='warn'>Предупреждение</p>
+    <p>Подтверждение</p>
     <div v-for="(koleso, index) in kolesa" :key="index">
       <p>{{ koleso.id }} </p>
       <p>{{ koleso.wheel_id }}</p>
@@ -56,18 +57,18 @@ export default {
 </script>
 
 <style scoped>
-  /* div div{
+  div div{
+    margin-left: 25vh;
     flex-direction: row;
     display: flex; 
-  } */
+    flex-wrap: wrap;
+  } 
   div div div{
+    margin-left: 0;
     color: black ;
     font-weight: bolder;
-    flex-direction: row;
-    display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
       }
 
   p   {
@@ -88,6 +89,7 @@ export default {
       color: aliceblue ;
       border-radius: 6px;
       border-style: solid;
+      margin-left: 15vh;
         }
 
   .warn{
