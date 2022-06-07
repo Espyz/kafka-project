@@ -106,8 +106,8 @@ def article():
 
     return render_template('article.html',)
 
-@app.route('/front-end/')
-def front_end():
+@app.route('/front-end-events/')
+def front_end_events():
     data = db.session.query(Events).filter(Events.warning == 'Снижение производительности').limit(30)
     # return render_template('front.html', data = data)
     cols = ['id', 'wheel_id', 'warning']
@@ -116,16 +116,21 @@ def front_end():
     response.headers.add("Access-Control-Allow-Origin", "*")
     return response
 
-@app.route('/aa/front-end/')
-def front():
-    data = db.session.query(Events).filter(Events.warning == 'Снижение производительности').all()
-    return render_template('front.html', data = data)
+@app.route('/front-end-idle/')
+def front_end_idle_events():
+    data = db.session.query(IdleEvents).all()
+    cols = ['wheel_id', 'start_downtime', 'end_downtime']
+    result = [{col: getattr(d, col) for col in cols} for d in data]
+    response = make_response(jsonify(result=result), 200)
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 @app.route('/back/', methods=['post'])
 def del_date():
     data = request.get_json()
-    id = data["id"]
-    data = db.session.query(Events).filter(Events.id == id).first()
+    print(data)
+    wheel_id = data["wheel_id"]
+    data = db.session.query(Events).filter(Events.wheel_id == wheel_id).first()
     db.session.delete(data)
     db.session.commit()
     return make_response(jsonify({ "success": True }), 200)
@@ -168,6 +173,17 @@ class Events(db.Model):
 
     def __repr__(self):
         return '<{}, {}:{}>'.format(self.id, self.wheel_id, self.warning) 
+
+class IdleEvents(db.Model):
+    __tablename__ = 'idle_events'
+    id = db.Column(db.Integer(), primary_key=True, onupdate = True)
+    part = db.Column(db.Text(), nullable=False)
+    wheel_id = db.Column(db.Integer(), nullable=False)
+    start_downtime = db.Column(db.Text(), nullable=False)
+    end_downtime = db.Column(db.Text(), nullable=False)
+
+    def __repr__(self):
+        return '<{}, {}, {}>'.format(self.wheel_id, self.start_downtime, self.end_downtime) 
 
 @app.route('/session/')
 def updating_session():
