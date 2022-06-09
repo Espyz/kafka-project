@@ -5,7 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__, static_folder="static_dir", template_folder="jinja_templates")
-app.debug = True
 app.config['SECRET_KEY'] = '33215033'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://sammy:33215033@localhost:5432/sammy'
 
